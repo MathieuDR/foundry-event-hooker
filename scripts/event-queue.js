@@ -59,13 +59,6 @@ class EventQueue {
     // Get API endpoint URL from settings
     const apiEndpoint = game.settings.get("foundry-event-hooker", "apiEndpoint");
     
-    // Skip if no API URL configured
-    if (!apiEndpoint || apiEndpoint.trim() === "") {
-      console.log("Foundry Event Hooker | No API endpoint configured, clearing queue");
-      this.events = [];
-      return;
-    }
-
     // Prepare batch payload
     const batchData = {
       events: [...this.events] // Clone the events array
@@ -74,6 +67,16 @@ class EventQueue {
     // Clear the queue immediately (before sending)
     const eventCount = this.events.length;
     this.events = [];
+
+    // If no API URL configured, log the events instead
+    if (!apiEndpoint || apiEndpoint.trim() === "") {
+      console.group(`🎯 Foundry Event Hooker | LOGGING MODE - ${eventCount} events (no API endpoint set)`);
+      batchData.events.forEach((event, index) => {
+        console.log(`Event ${index + 1}:`, event);
+      });
+      console.groupEnd();
+      return;
+    }
 
     try {
       console.log(`Foundry Event Hooker | Sending batch of ${eventCount} events to ${apiEndpoint}`);

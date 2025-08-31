@@ -12,6 +12,11 @@
 export function extractEventData(hookName, ...args) {
   const timestamp = Date.now();
   
+  // Debug logging for what we actually receive
+  if (CONFIG.debug?.hooks) {
+    console.log(`🔍 Foundry Event Hooker | Raw event data for ${hookName}:`, args);
+  }
+  
   // Base event structure
   const eventData = {
     event: hookName,
@@ -112,12 +117,13 @@ function extractGenericEvent(baseEvent, args) {
  * @returns {Object} Basic actor data
  */
 export function extractActorBasics(actor) {
-  if (!actor) return null;
+  if (!actor) return {};
   
   return {
     id: actor._id || actor.id,
     name: actor.name,
-    type: actor.type
+    type: actor.type,
+    img: actor.img
   };
 }
 
@@ -127,11 +133,12 @@ export function extractActorBasics(actor) {
  * @returns {Object} Roll data
  */
 export function extractRollData(roll) {
-  if (!roll) return null;
+  if (!roll) return {};
   
   const rollData = {
     total: roll.total,
-    formula: roll.formula
+    formula: roll.formula,
+    dice: []
   };
   
   // Extract dice results if available
