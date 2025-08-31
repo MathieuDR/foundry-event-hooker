@@ -1,0 +1,60 @@
+/**
+ * Foundry Event Hooker - Main Entry Point
+ * Hooks into D&D 5e events and sends them to a configurable API endpoint
+ */
+
+import { registerSettings } from "./settings.js";
+import { startEventQueue } from "./event-queue.js";
+import { extractEventData } from "./data-filter.js";
+
+// List of D&D 5e hooks to monitor
+const MONITORED_HOOKS = [
+  'dnd5e.rollSkill',
+  'dnd5e.rollAbilityCheck', 
+  'dnd5e.rollSavingThrow',
+  'dnd5e.rollAttack',
+  'dnd5e.rollDamage', 
+  'dnd5e.rollInitiative',
+  'dnd5e.rollDeathSave',
+  'dnd5e.applyDamage'
+];
+
+/**
+ * Initialize the module
+ */
+Hooks.once('init', function() {
+  console.log("Foundry Event Hooker | Initializing module");
+  
+  // Register module settings
+  registerSettings();
+});
+
+/**
+ * Start the event system once Foundry is ready
+ */
+Hooks.once('ready', function() {
+  console.log("Foundry Event Hooker | Starting event system");
+  
+  // Start the event queue system
+  startEventQueue();
+  
+  // Register listeners for all monitored hooks
+  registerHookListeners();
+});
+
+/**
+ * Register listeners for all D&D 5e hooks we want to monitor
+ */
+function registerHookListeners() {
+  MONITORED_HOOKS.forEach(hookName => {
+    Hooks.on(hookName, function(...args) {
+      // Extract essential data from the hook
+      const eventData = extractEventData(hookName, ...args);
+      
+      // Add to event queue for batching
+      window.eventQueue?.addEvent(eventData);
+    });
+  });
+  
+  console.log(`Foundry Event Hooker | Registered listeners for ${MONITORED_HOOKS.length} hooks`);
+}

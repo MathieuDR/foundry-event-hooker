@@ -1,0 +1,10 @@
+{
+  "foundry-event-hooker": {
+    "settings": {
+      "apiEndpoint": {
+        "name": "API Endpoint URL",
+        "hint": "The URL where events will be sent (e.g., https://your-api.com/events)"
+      }
+    }
+  }
+}
