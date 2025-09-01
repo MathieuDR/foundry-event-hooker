@@ -1,0 +1,48 @@
+[
+  {
+    "sound": "sounds/dice.wav",
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "flavor": "Roll Hit Dice",
+    "title": "Roll Hit Dice: Lilly (Copy)",
+    "flags": {
+      "dnd5e": {
+        "roll": {
+          "type": "hitDie"
+        }
+      },
+      "core": {
+        "canPopout": true
+      }
+    },
+    "rolls": [
+      "{\"class\":\"BasicRoll\",\"options\":{},\"dice\":[],\"formula\":\"max(0,1d6 + 2)\",\"terms\":[{\"class\":\"FunctionTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"fn\":\"max\",\"terms\":[\"0\",\"1d6 + 2\"],\"rolls\":[{\"class\":\"BasicRoll\",\"options\":{},\"dice\":[],\"formula\":\"0\",\"terms\":[{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":0}],\"total\":0,\"evaluated\":true},{\"class\":\"BasicRoll\",\"options\":{},\"dice\":[],\"formula\":\"1d6 + 2\",\"terms\":[{\"class\":\"Die\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":1,\"faces\":6,\"modifiers\":[],\"results\":[{\"result\":1,\"active\":true}]},{\"class\":\"OperatorTerm\",\"options\":{},\"evaluated\":true,\"operator\":\"+\"},{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":2}],\"total\":3,\"evaluated\":true}],\"result\":3}],\"total\":3,\"evaluated\":true}"
+    ],
+    "_id": "rKrJKA1eejYYdpWr",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756761589752,
+    "content": "",
+    "whisper": [],
+    "blind": false,
+    "emote": false,
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756761589767,
+      "modifiedTime": 1756761589767,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {}
+]

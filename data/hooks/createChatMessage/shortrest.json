@@ -1,0 +1,55 @@
+[
+  {
+    "content": "Lilly (Copy) takes a short rest.",
+    "flavor": "Short Rest (1 hour, new day)",
+    "type": "rest",
+    "rolls": [],
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "system": {
+      "activations": [],
+      "deltas": {
+        "actor": [],
+        "item": {}
+      },
+      "request": null,
+      "type": "short"
+    },
+    "whisper": [],
+    "blind": false,
+    "_id": "5JKaTJ6euPEJXrPV",
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756762071248,
+    "sound": null,
+    "emote": false,
+    "flags": {
+      "core": {
+        "canPopout": true
+      }
+    },
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756762071263,
+      "modifiedTime": 1756762071263,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {
+    "action": "create",
+    "modifiedTime": 1756762071263,
+    "render": true,
+    "renderSheet": false,
+    "parent": null
+  },
+  "OBMXUVJe8fTkR6yS"
+]

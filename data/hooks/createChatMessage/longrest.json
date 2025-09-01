@@ -1,0 +1,67 @@
+[
+  {
+    "content": "Lilly (Copy) takes a long rest and recovers 1 hit die.",
+    "flavor": "Long Rest (8 hours, new day)",
+    "type": "rest",
+    "rolls": [],
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "system": {
+      "activations": [],
+      "deltas": {
+        "actor": [
+          {
+            "keyPath": "system.spells.spell1.value",
+            "delta": 2
+          }
+        ],
+        "item": {
+          "64clgz4yZAAwKQI1": [
+            {
+              "keyPath": "system.hd.spent",
+              "delta": -1
+            }
+          ]
+        }
+      },
+      "request": null,
+      "type": "long"
+    },
+    "whisper": [],
+    "blind": false,
+    "_id": "szHCsgSTchkF0Y1B",
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756761969922,
+    "sound": null,
+    "emote": false,
+    "flags": {
+      "core": {
+        "canPopout": true
+      }
+    },
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756761969934,
+      "modifiedTime": 1756761969934,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {
+    "action": "create",
+    "modifiedTime": 1756761969934,
+    "render": true,
+    "renderSheet": false,
+    "parent": null
+  },
+  "OBMXUVJe8fTkR6yS"
+]
