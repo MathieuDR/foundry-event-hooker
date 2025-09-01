@@ -143,8 +143,8 @@ export function extractRollData(roll) {
   if (!roll) return {};
 
   const rollData = {
-    total: roll.total,
-    formula: roll.formula,
+    total: roll[0]._total,
+    formula: roll[0]._formula,
     dice: []
   };
 
