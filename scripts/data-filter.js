@@ -11,12 +11,12 @@
  */
 export function extractEventData(hookName, ...args) {
   const timestamp = Date.now();
-  
+
   // Debug logging for what we actually receive
   if (CONFIG.debug?.hooks) {
     console.log(`🔍 Foundry Event Hooker | Raw event data for ${hookName}:`, args);
   }
-  
+
   // Base event structure with world/game context
   const eventData = {
     event: hookName,
@@ -28,7 +28,7 @@ export function extractEventData(hookName, ...args) {
       systemVersion: game.system?.version
     }
   };
-  
+
   // Extract data based on hook type
   try {
     switch (hookName) {
@@ -36,16 +36,16 @@ export function extractEventData(hookName, ...args) {
       case 'dnd5e.rollAbilityCheck':
       case 'dnd5e.rollSavingThrow':
         return extractRollEvent(eventData, args);
-      
+
       case 'dnd5e.rollAttack':
       case 'dnd5e.rollDamage':
       case 'dnd5e.rollInitiative':
       case 'dnd5e.rollDeathSave':
         return extractRollEvent(eventData, args);
-      
+
       case 'dnd5e.applyDamage':
         return extractDamageEvent(eventData, args);
-      
+
       default:
         return extractGenericEvent(eventData, args);
     }
@@ -64,14 +64,14 @@ export function extractEventData(hookName, ...args) {
 function extractRollEvent(baseEvent, args) {
   // FoundryVTT D&D5e hooks pass: [roll, context]
   const [roll, context] = args;
-  
+
   const eventData = {
     ...baseEvent,
     actor: extractActorBasics(context?.subject),
     roll: extractRollData(roll),
     context: extractContext(baseEvent.event, context)
   };
-  
+
   return eventData;
 }
 
@@ -83,7 +83,7 @@ function extractRollEvent(baseEvent, args) {
  */
 function extractDamageEvent(baseEvent, args) {
   const [actor, damage, options] = args;
-  
+
   const eventData = {
     ...baseEvent,
     actor: extractActorBasics(actor),
@@ -93,7 +93,7 @@ function extractDamageEvent(baseEvent, args) {
     },
     context: extractContext(baseEvent.event, options)
   };
-  
+
   return eventData;
 }
 
@@ -109,12 +109,12 @@ function extractGenericEvent(baseEvent, args) {
     ...baseEvent,
     argsCount: args.length
   };
-  
+
   // Try to extract actor if first arg looks like one
   if (args[0] && args[0]._id && args[0].name) {
     eventData.actor = extractActorBasics(args[0]);
   }
-  
+
   return eventData;
 }
 
@@ -125,7 +125,7 @@ function extractGenericEvent(baseEvent, args) {
  */
 export function extractActorBasics(actor) {
   if (!actor) return {};
-  
+
   return {
     id: actor._id || actor.id,
     name: actor.name,
@@ -141,21 +141,33 @@ export function extractActorBasics(actor) {
  */
 export function extractRollData(roll) {
   if (!roll) return {};
-  
+
   const rollData = {
     total: roll.total,
     formula: roll.formula,
     dice: []
   };
-  
-  // Extract dice results if available
-  if (roll.dice && Array.isArray(roll.dice)) {
-    rollData.dice = roll.dice.map(die => ({
+
+  // Extract dice results - check multiple possible locations
+  const diceSource = roll.dice || roll.terms?.filter(term => term.class === 'D20Die' || term.class === 'Die') || [];
+
+  if (Array.isArray(diceSource)) {
+    rollData.dice = diceSource.map(die => ({
       faces: die.faces,
-      results: die.results?.map(r => r.result) || []
+      results: die.results?.map(r => r.result || r) || []
     }));
   }
-  
+
+  // If no dice found in expected locations, try extracting from terms
+  if (rollData.dice.length === 0 && roll.terms) {
+    rollData.dice = roll.terms
+      .filter(term => term.faces && term.results)
+      .map(die => ({
+        faces: die.faces,
+        results: die.results.map(r => r.result || r)
+      }));
+  }
+
   return rollData;
 }
 
@@ -167,36 +179,36 @@ export function extractRollData(roll) {
  */
 export function extractContext(hookName, options) {
   if (!options) return {};
-  
+
   const context = {};
-  
+
   // Extract relevant context based on hook type
   switch (hookName) {
     case 'dnd5e.rollSkill':
       if (options.skill) context.skill = options.skill;
       break;
-      
+
     case 'dnd5e.rollAbilityCheck':
       if (options.ability) context.ability = options.ability;
       break;
-      
+
     case 'dnd5e.rollSavingThrow':
       if (options.ability) context.savingThrow = options.ability;
       break;
-      
+
     case 'dnd5e.rollAttack':
       if (options.attackType) context.attackType = options.attackType;
       if (options.weapon) context.weaponName = options.weapon.name;
       break;
-      
+
     case 'dnd5e.rollDamage':
       if (options.damageType) context.damageType = options.damageType;
       break;
-      
+
     case 'dnd5e.applyDamage':
       if (options.damageType) context.damageType = options.damageType;
       break;
   }
-  
+
   return context;
 }
