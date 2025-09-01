@@ -17,10 +17,16 @@ export function extractEventData(hookName, ...args) {
     console.log(`🔍 Foundry Event Hooker | Raw event data for ${hookName}:`, args);
   }
   
-  // Base event structure
+  // Base event structure with world/game context
   const eventData = {
     event: hookName,
-    timestamp: timestamp
+    timestamp: timestamp,
+    world: {
+      id: game.world?.id,
+      title: game.world?.title,
+      system: game.system?.id,
+      systemVersion: game.system?.version
+    }
   };
   
   // Extract data based on hook type
@@ -56,13 +62,14 @@ export function extractEventData(hookName, ...args) {
  * @returns {Object} Filtered roll event data
  */
 function extractRollEvent(baseEvent, args) {
-  const [actor, roll, options] = args;
+  // FoundryVTT D&D5e hooks pass: [roll, context]
+  const [roll, context] = args;
   
   const eventData = {
     ...baseEvent,
-    actor: extractActorBasics(actor),
+    actor: extractActorBasics(context?.subject),
     roll: extractRollData(roll),
-    context: extractContext(baseEvent.event, options)
+    context: extractContext(baseEvent.event, context)
   };
   
   return eventData;
@@ -167,12 +174,10 @@ export function extractContext(hookName, options) {
   switch (hookName) {
     case 'dnd5e.rollSkill':
       if (options.skill) context.skill = options.skill;
-      if (options.skillName) context.skillName = options.skillName;
       break;
       
     case 'dnd5e.rollAbilityCheck':
       if (options.ability) context.ability = options.ability;
-      if (options.abilityName) context.abilityName = options.abilityName;
       break;
       
     case 'dnd5e.rollSavingThrow':
