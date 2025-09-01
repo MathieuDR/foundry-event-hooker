@@ -6,10 +6,6 @@
     "img": "tokenizer/pc-images/lilly.Avatar.webp?1756411399673",
     "system": {
       "currency": {
-        "pp": 0,
-        "gp": 25,
-        "ep": 0,
-        "sp": 0,
         "cp": 0
       },
       "abilities": {
