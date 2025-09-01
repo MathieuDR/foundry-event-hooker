@@ -1,0 +1,58 @@
+[
+  {
+    "content": "<div class=\"chat-card activation-card\">\n    <section class=\"card-header description collapsible\">\n        <header class=\"summary\">\n            <img class=\"gold-icon\" src=\"icons/weapons/daggers/dagger-black.webp\" alt=\"Dagger\" />\n            <div class=\"name-stacked border\">\n                <span class=\"title\">Dagger</span>\n                <span class=\"subtitle\">Simple Melee</span>\n            </div>\n            <i class=\"fa-solid fa-chevron-down fa-fw\" inert></i>\n        </header>\n        <section class=\"details collapsible-content card-content\">\n            <div class=\"wrapper\"><div class=\"ddb\">\n<p>Proficiency with a Dagger allows you to add your proficiency bonus to the attack roll for any attack you make with it.</p>\n<div class=\"mastery-container\"><hr />\n<p>This weapon has the following mastery property. To use this property, you must have a feature that lets you use it.</p>\n<p><strong><em><span class=\"reference-link\"><a class=\"content-link\" draggable=\"true\" data-link data-uuid=\"Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.l0uao3UVco5ptQso\" data-id=\"l0uao3UVco5ptQso\" data-type=\"JournalEntryPage\" data-pack=\"dnd5e.content24\" data-tooltip=\"Page\" data-tooltip-text=\"Rule Page\"><i class=\"fa-solid fa-book-open\" inert></i>Nick</a></span>.</em></strong> When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.</p>\n</div>\n</div></div>\n        </section>\n    </section>\n\n    <div class=\"card-buttons\">\n        <button type=\"button\" data-action=\"rollAttack\">\n            <i class=\"dnd5e-icon\" data-src=\"systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg\" inert></i> <span>Attack</span>\n        </button>\n        <button type=\"button\" data-action=\"rollDamage\">\n            <i class=\"fa-solid fa-burst\" inert></i> <span>Damage</span>\n        </button>\n    </div>\n\n\n    <ul class=\"card-footer pills unlist\">\n        <li class=\"pill transparent\">\n            <span class=\"label\">Action</span>\n        </li>\n        <li class=\"pill transparent\">\n            <span class=\"label\">Turn</span>\n        </li>\n        <li class=\"pill transparent\">\n            <span class=\"label\">20/60 ft</span>\n        </li>\n        <li class=\"pill transparent\">\n            <span class=\"label\">reach 5 ft</span>\n        </li>\n        <li class=\"pill transparent\">\n            <span class=\"label\">Equipped</span>\n        </li>\n        <li class=\"pill transparent\">\n            <span class=\"label\">Proficient</span>\n        </li>\n    </ul>\n</div>",
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "title": "Dagger - Attack",
+    "flags": {
+      "dnd5e": {
+        "activity": {
+          "type": "attack",
+          "id": "attackDaggerIIII",
+          "uuid": "Actor.0u44NxNEYVi269MW.Item.DowKHSqv97NDxUMT.Activity.attackDaggerIIII"
+        },
+        "item": {
+          "type": "weapon",
+          "id": "DowKHSqv97NDxUMT",
+          "uuid": "Actor.0u44NxNEYVi269MW.Item.DowKHSqv97NDxUMT"
+        },
+        "targets": [],
+        "messageType": "usage",
+        "use": {
+          "effects": []
+        }
+      },
+      "core": {
+        "canPopout": true
+      }
+    },
+    "rolls": [],
+    "whisper": [],
+    "blind": false,
+    "_id": "5Z3d5YzFU0ZxsjE7",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756760340610,
+    "flavor": "",
+    "sound": null,
+    "emote": false,
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756760340621,
+      "modifiedTime": 1756760340621,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {}
+]

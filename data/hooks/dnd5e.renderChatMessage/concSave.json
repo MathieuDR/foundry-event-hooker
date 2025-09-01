@@ -1,0 +1,49 @@
+[
+  {
+    "sound": "sounds/dice.wav",
+    "flags": {
+      "dnd5e": {
+        "messageType": "roll",
+        "roll": {
+          "ability": "con",
+          "type": "save"
+        }
+      },
+      "core": {
+        "canPopout": true
+      }
+    },
+    "flavor": "Constitution Saving Throw",
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "rolls": [
+      "{\"class\":\"D20Roll\",\"options\":{\"advantage\":false,\"disadvantage\":false,\"maximum\":null,\"minimum\":null,\"advantageMode\":0,\"criticalSuccess\":20,\"criticalFailure\":1,\"target\":10,\"configured\":true,\"rollType\":\"save\"},\"dice\":[],\"formula\":\"1d20 + 2\",\"terms\":[{\"class\":\"Die\",\"options\":{\"flavor\":null,\"elvenAccuracy\":false,\"halflingLucky\":false,\"advantageMode\":0,\"criticalSuccess\":20,\"criticalFailure\":1,\"target\":10},\"evaluated\":true,\"number\":1,\"faces\":20,\"modifiers\":[],\"results\":[{\"result\":9,\"active\":true}]},{\"class\":\"OperatorTerm\",\"options\":{},\"evaluated\":true,\"operator\":\"+\"},{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":2}],\"total\":11,\"evaluated\":true}"
+    ],
+    "_id": "0NSZmwIuVPCLLjCj",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756759992628,
+    "content": "",
+    "whisper": [],
+    "blind": false,
+    "emote": false,
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756759992640,
+      "modifiedTime": 1756759992640,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {}
+]

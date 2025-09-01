@@ -1,0 +1,36 @@
+{
+  "content": "blabla",
+  "style": 1,
+  "author": "OBMXUVJe8fTkR6yS",
+  "_id": "m9U5B9YvsBQ1F4rF",
+  "type": "base",
+  "system": {},
+  "timestamp": 1756757886622,
+  "flavor": "",
+  "speaker": {
+    "scene": null,
+    "actor": null,
+    "token": null
+  },
+  "whisper": [],
+  "blind": false,
+  "rolls": [],
+  "sound": null,
+  "emote": false,
+  "flags": {
+    "core": {
+      "canPopout": true
+    }
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.347",
+    "systemId": "dnd5e",
+    "systemVersion": "5.1.1",
+    "createdTime": 1756757886634,
+    "modifiedTime": 1756757886634,
+    "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+  }
+}

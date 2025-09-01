@@ -1,0 +1,51 @@
+[
+  {
+    "sound": "sounds/dice.wav",
+    "flags": {
+      "dnd5e": {
+        "messageType": "roll",
+        "roll": {
+          "skillId": "acr",
+          "type": "skill"
+        }
+      },
+      "core": {
+        "canPopout": true
+      }
+    },
+    "flavor": "Dexterity (Acrobatics) Check",
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "actor": "0u44NxNEYVi269MW",
+      "token": null,
+      "alias": "Lilly (Copy)"
+    },
+    "rolls": [
+      "{\"class\":\"D20Roll\",\"options\":{\"maximum\":null,\"minimum\":null,\"advantageMode\":0,\"criticalSuccess\":20,\"criticalFailure\":1,\"reliableTalent\":false,\"configured\":true,\"rollType\":\"skill\"},\"dice\":[],\"formula\":\"1d20 + 4\",\"terms\":[{\"class\":\"Die\",\"options\":{\"flavor\":null,\"elvenAccuracy\":false,\"halflingLucky\":false,\"advantageMode\":0,\"criticalSuccess\":20,\"criticalFailure\":1},\"evaluated\":true,\"number\":1,\"faces\":20,\"modifiers\":[],\"results\":[{\"result\":7,\"active\":true}]},{\"class\":\"OperatorTerm\",\"options\":{},\"evaluated\":true,\"operator\":\"+\"},{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":4}],\"total\":11,\"evaluated\":true}"
+    ],
+    "_id": "xNRbaOaPdQU9o6WF",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756757199128,
+    "content": "",
+    "whisper": [
+      "OBMXUVJe8fTkR6yS"
+    ],
+    "blind": false,
+    "emote": false,
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756757199141,
+      "modifiedTime": 1756757199141,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {}
+]

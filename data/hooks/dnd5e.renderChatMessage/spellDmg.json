@@ -1,0 +1,60 @@
+[
+  {
+    "sound": "sounds/dice.wav",
+    "flavor": "Rock Slam - Damage Roll",
+    "flags": {
+      "dnd5e": {
+        "activity": {
+          "type": "attack",
+          "id": "4PbV1idNiIkSL49k",
+          "uuid": "Actor.0u44NxNEYVi269MW.Item.bimAkIRlm77ziUFN.Activity.4PbV1idNiIkSL49k"
+        },
+        "item": {
+          "type": "spell",
+          "id": "bimAkIRlm77ziUFN",
+          "uuid": "Actor.0u44NxNEYVi269MW.Item.bimAkIRlm77ziUFN"
+        },
+        "targets": [],
+        "messageType": "roll",
+        "roll": {
+          "type": "damage"
+        },
+        "originatingMessage": "13XxZkA01whpdVKg"
+      },
+      "core": {
+        "canPopout": true
+      }
+    },
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "rolls": [
+      "{\"class\":\"DamageRoll\",\"options\":{\"type\":\"bludgeoning\",\"types\":[\"bludgeoning\"],\"properties\":[\"mgc\"],\"isCritical\":false,\"critical\":{\"multiplyNumeric\":false,\"powerfulCritical\":false},\"preprocessed\":true,\"configured\":true,\"rollType\":\"damage\"},\"dice\":[],\"formula\":\"1d10\",\"terms\":[{\"class\":\"Die\",\"options\":{\"flavor\":null,\"baseNumber\":1},\"evaluated\":true,\"number\":1,\"faces\":10,\"modifiers\":[],\"results\":[{\"result\":4,\"active\":true}]}],\"total\":4,\"evaluated\":true}"
+    ],
+    "_id": "6NidcKz73yJkPquh",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756761415899,
+    "content": "[object HTMLLIElement]",
+    "whisper": [],
+    "blind": false,
+    "emote": false,
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756761415911,
+      "modifiedTime": 1756761415969,
+      "lastModifiedBy": "4ckDtaRpdKGYV1Gb"
+    }
+  },
+  {}
+]

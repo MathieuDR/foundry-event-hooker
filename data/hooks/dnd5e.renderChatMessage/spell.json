@@ -1,0 +1,60 @@
+[
+  {
+    "sound": "sounds/dice.wav",
+    "flavor": "Rock Slam - Attack Roll",
+    "flags": {
+      "dnd5e": {
+        "activity": {
+          "type": "attack",
+          "id": "4PbV1idNiIkSL49k",
+          "uuid": "Actor.0u44NxNEYVi269MW.Item.bimAkIRlm77ziUFN.Activity.4PbV1idNiIkSL49k"
+        },
+        "item": {
+          "type": "spell",
+          "id": "bimAkIRlm77ziUFN",
+          "uuid": "Actor.0u44NxNEYVi269MW.Item.bimAkIRlm77ziUFN"
+        },
+        "targets": [],
+        "messageType": "roll",
+        "roll": {
+          "type": "attack"
+        },
+        "originatingMessage": "13XxZkA01whpdVKg"
+      },
+      "core": {
+        "canPopout": true
+      }
+    },
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly (Copy)"
+    },
+    "rolls": [
+      "{\"class\":\"D20Roll\",\"options\":{\"criticalSuccess\":20,\"advantageMode\":0,\"criticalFailure\":1,\"configured\":true,\"rollType\":\"attack\"},\"dice\":[],\"formula\":\"1d20 + 4 + 2\",\"terms\":[{\"class\":\"Die\",\"options\":{\"flavor\":null,\"elvenAccuracy\":false,\"halflingLucky\":false,\"advantageMode\":0,\"criticalSuccess\":20,\"criticalFailure\":1},\"evaluated\":true,\"number\":1,\"faces\":20,\"modifiers\":[],\"results\":[{\"result\":5,\"active\":true}]},{\"class\":\"OperatorTerm\",\"options\":{},\"evaluated\":true,\"operator\":\"+\"},{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":4},{\"class\":\"OperatorTerm\",\"options\":{},\"evaluated\":true,\"operator\":\"+\"},{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":2}],\"total\":11,\"evaluated\":true}"
+    ],
+    "_id": "62mljWIAeMPfLApp",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "author": "OBMXUVJe8fTkR6yS",
+    "timestamp": 1756761383730,
+    "content": "",
+    "whisper": [],
+    "blind": false,
+    "emote": false,
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756761383743,
+      "modifiedTime": 1756761383743,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {}
+]

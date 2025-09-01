@@ -1,0 +1,40 @@
+[
+  {
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly"
+    },
+    "content": "Lilly nani",
+    "style": 3,
+    "author": "OBMXUVJe8fTkR6yS",
+    "_id": "EHLynRfnNdd2OVk7",
+    "type": "base",
+    "system": {},
+    "timestamp": 1756757987793,
+    "flavor": "",
+    "whisper": [],
+    "blind": false,
+    "rolls": [],
+    "sound": null,
+    "emote": false,
+    "flags": {
+      "core": {
+        "canPopout": true
+      }
+    },
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756757987804,
+      "modifiedTime": 1756757987804,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {}
+]

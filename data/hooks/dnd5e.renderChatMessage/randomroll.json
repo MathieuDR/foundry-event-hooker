@@ -1,0 +1,44 @@
+[
+  {
+    "speaker": {
+      "scene": "fAZAbCtRPh5CAWRV",
+      "token": "yavuUdb2JaP42Dv4",
+      "actor": "0u44NxNEYVi269MW",
+      "alias": "Lilly"
+    },
+    "rolls": [
+      "{\"class\":\"BasicRoll\",\"options\":{},\"dice\":[],\"formula\":\"2d20 + 10\",\"terms\":[{\"class\":\"Die\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":2,\"faces\":20,\"modifiers\":[],\"results\":[{\"result\":8,\"active\":true},{\"result\":18,\"active\":true}]},{\"class\":\"OperatorTerm\",\"options\":{},\"evaluated\":true,\"operator\":\"+\"},{\"class\":\"NumericTerm\",\"options\":{\"flavor\":null},\"evaluated\":true,\"number\":10}],\"total\":36,\"evaluated\":true}"
+    ],
+    "sound": "sounds/dice.wav",
+    "content": "36",
+    "author": "OBMXUVJe8fTkR6yS",
+    "_id": "YERLb5rLRW5Ypebt",
+    "type": "base",
+    "system": {},
+    "style": 0,
+    "timestamp": 1756760202719,
+    "flavor": "",
+    "whisper": [],
+    "blind": false,
+    "emote": false,
+    "flags": {
+      "core": {
+        "canPopout": true
+      }
+    },
+    "_stats": {
+      "compendiumSource": null,
+      "duplicateSource": null,
+      "exportSource": null,
+      "coreVersion": "13.347",
+      "systemId": "dnd5e",
+      "systemVersion": "5.1.1",
+      "createdTime": 1756760202739,
+      "modifiedTime": 1756760202739,
+      "lastModifiedBy": "OBMXUVJe8fTkR6yS"
+    }
+  },
+  {
+    "_lifeSpan": null
+  }
+]
