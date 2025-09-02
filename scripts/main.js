@@ -5,15 +5,15 @@
 
 import { registerSettings } from "./settings.js";
 import { startEventQueue } from "./event-queue.js";
-import { extractEventData } from "./data-filter.js";
+import { extractEventData, shouldLogHook } from "./data-filter.js";
 
 // List of D&D 5e hooks to monitor
 const MONITORED_HOOKS = [
   'dnd5e.rollSkill',
-  'dnd5e.rollAbilityCheck', 
+  'dnd5e.rollAbilityCheck',
   'dnd5e.rollSavingThrow',
   'dnd5e.rollAttack',
-  'dnd5e.rollDamage', 
+  'dnd5e.rollDamage',
   'dnd5e.rollInitiative',
   'dnd5e.rollDeathSave',
   'dnd5e.applyDamage'
@@ -24,7 +24,7 @@ const MONITORED_HOOKS = [
  */
 Hooks.once('init', function() {
   console.log("Foundry Event Hooker | Initializing module");
-  
+
   // Register module settings
   registerSettings();
 });
@@ -34,10 +34,10 @@ Hooks.once('init', function() {
  */
 Hooks.once('ready', function() {
   console.log("Foundry Event Hooker | Starting event system");
-  
+
   // Start the event queue system
   startEventQueue();
-  
+
   // Register listeners for all monitored hooks
   registerHookListeners();
 });
@@ -48,13 +48,17 @@ Hooks.once('ready', function() {
 function registerHookListeners() {
   MONITORED_HOOKS.forEach(hookName => {
     Hooks.on(hookName, function(...args) {
-      // Extract essential data from the hook
-      const eventData = extractEventData(hookName, ...args);
-      
-      // Add to event queue for batching
-      window.eventQueue?.addEvent(eventData);
+      const shouldLog = shouldLogHook(hookName, ...args)
+
+      if (shouldLog) {
+        // Extract essential data from the hook
+        const eventData = extractEventData(hookName, ...args);
+
+        // Add to event queue for batching
+        window.eventQueue?.addEvent(eventData);
+      }
     });
   });
-  
+
   console.log(`Foundry Event Hooker | Registered listeners for ${MONITORED_HOOKS.length} hooks`);
 }

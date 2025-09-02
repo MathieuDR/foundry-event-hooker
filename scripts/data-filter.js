@@ -10,17 +10,13 @@
  * @returns {Object} Filtered event data
  */
 export function extractEventData(hookName, ...args) {
-  const timestamp = Date.now();
-
-  // Debug logging for what we actually receive
   if (CONFIG.debug?.hooks) {
     console.log(`🔍 Foundry Event Hooker | Raw event data for ${hookName}:`, args);
   }
 
-  // Base event structure with world/game context
   const eventData = {
     event: hookName,
-    timestamp: timestamp,
+    timestamp: Date.now(),
     world: {
       id: game.world?.id,
       title: game.world?.title,
@@ -29,25 +25,12 @@ export function extractEventData(hookName, ...args) {
     }
   };
 
-  // Extract data based on hook type
   try {
-    switch (hookName) {
-      case 'dnd5e.rollSkill':
-      case 'dnd5e.rollAbilityCheck':
-      case 'dnd5e.rollSavingThrow':
-        return extractRollEvent(eventData, args);
+    attributes = extractAttributes(hookName, args)
 
-      case 'dnd5e.rollAttack':
-      case 'dnd5e.rollDamage':
-      case 'dnd5e.rollInitiative':
-      case 'dnd5e.rollDeathSave':
-        return extractRollEvent(eventData, args);
-
-      case 'dnd5e.applyDamage':
-        return extractDamageEvent(eventData, args);
-
-      default:
-        return extractGenericEvent(eventData, args);
+    return {
+      ...eventData,
+      attributes: attributes
     }
   } catch (error) {
     console.warn(`Foundry Event Hooker | Error extracting data for ${hookName}:`, error);
@@ -55,160 +38,161 @@ export function extractEventData(hookName, ...args) {
   }
 }
 
-/**
- * Extract data from roll-based events
- * @param {Object} baseEvent - Base event structure
- * @param {Array} args - Hook arguments
- * @returns {Object} Filtered roll event data
- */
-function extractRollEvent(baseEvent, args) {
-  // FoundryVTT D&D5e hooks pass: [roll, context]
-  const [roll, context] = args;
+export function shouldLogHook(hookName, args) {
+  switch (hookName) {
+    case "createChatMessage":
+      return args[0].type == "rest"
 
-  const eventData = {
-    ...baseEvent,
-    actor: extractActorBasics(context?.subject),
-    roll: extractRollData(roll),
-    context: extractContext(baseEvent.event, context)
-  };
-
-  return eventData;
-}
-
-/**
- * Extract data from damage application events
- * @param {Object} baseEvent - Base event structure
- * @param {Array} args - Hook arguments
- * @returns {Object} Filtered damage event data
- */
-function extractDamageEvent(baseEvent, args) {
-  const [actor, damage, options] = args;
-
-  const eventData = {
-    ...baseEvent,
-    actor: extractActorBasics(actor),
-    damage: {
-      amount: damage,
-      type: options?.damageType || 'unknown'
-    },
-    context: extractContext(baseEvent.event, options)
-  };
-
-  return eventData;
-}
-
-/**
- * Extract data from generic events
- * @param {Object} baseEvent - Base event structure  
- * @param {Array} args - Hook arguments
- * @returns {Object} Filtered generic event data
- */
-function extractGenericEvent(baseEvent, args) {
-  // For unknown events, just capture basic info
-  const eventData = {
-    ...baseEvent,
-    argsCount: args.length
-  };
-
-  // Try to extract actor if first arg looks like one
-  if (args[0] && args[0]._id && args[0].name) {
-    eventData.actor = extractActorBasics(args[0]);
+    default:
+      return true
   }
-
-  return eventData;
 }
 
-/**
- * Extract just the basic actor information
- * @param {Object} actor - Actor document
- * @returns {Object} Basic actor data
- */
-export function extractActorBasics(actor) {
-  if (!actor) return {};
+export function extractAttributes(hookName, args) {
+  switch (hookName) {
+    case "createChatMessage":
+    case "dnd5e.createActiveEffect":
+      return createDocumentHook(args);
+
+    case "dnd5e.prepareSpellSlots":
+      return prepareSpellSlots(args)
+
+    case "updateActor":
+    case "updateItem":
+      return updateDocumentHook(args)
+
+    case "dnd5e.calculateDamage":
+      return calculateDamage(args)
+
+    case "dnd5e.damageActor":
+    case "dnd5e.healActor":
+      return damageOrHealActor(args)
+
+    case "dnd5e.renderChatMessage":
+      return args[0]
+
+    default:
+      return args
+  }
+}
+
+export function damageOrHealActor(args) {
+  return {
+    actor: extractFromActor(args[0]),
+    delta: args[1],
+    value: args[2],
+    userId: args[3]
+  }
+}
+
+export function calculateDamage(args) {
+  return {
+    damage: args[1],
+    actor: extractFromActor(args[0])
+  }
+}
+
+export function prepareSpellSlots(args) {
+  return {
+    spells: args[0],
+    actor: extractFromActor(args[1])
+  }
+}
+
+export function updateDocumentHook(args) {
+  return {
+    delta: args[1],
+    databaseOperation: args[2],
+    userId: args[3],
+    actor: extractFromActor(args[0])
+  }
+}
+
+export function createDocumentHook(args) {
+  const { parent, ...dbOperation } = args[1]
 
   return {
-    id: actor._id || actor.id,
+    userId: args[2],
+    document: args[0],
+    databaseOperation: dbOperation
+  }
+}
+
+export function extractFromActor(actor) {
+  if (actor.type != "character") { return {} }
+
+  return {
+    // Core Identity
+    id: actor._id,
     name: actor.name,
     type: actor.type,
-    img: actor.img
+
+    // Character Details
+    details: {
+      xp: actor.system?.details?.xp
+    },
+
+    // Core Stats
+    abilities: Object.keys(actor.system?.abilities || {}).reduce((acc, key) => {
+      const ability = actor.system.abilities[key];
+      acc[key] = {
+        value: ability.value,
+        proficient: ability.proficient
+      };
+      return acc;
+    }, {}),
+
+    attributes: {
+      hp: actor.system?.attributes?.hp,
+      ac: actor.system?.attributes?.ac,
+      init: actor.system?.attributes?.init,
+      exhaustion: actor.system?.attributes?.exhaustion,
+      concentration: actor.system?.attributes?.concentration,
+      death: actor.system?.attributes?.death,
+      inspiration: actor.system?.attributes?.inspiration,
+    },
+
+    // Skills and Proficiencies
+    traits: {
+      languages: actor.system?.traits?.languages?.value,
+      weapons: actor.system?.traits?.weaponProf?.value,
+      armor: actor.system?.traits?.armorProf?.value,
+    },
+
+    // Resources and Currency
+    currency: actor.system?.currency,
+    resources: actor.system?.resources,
+    spells: actor.system?.spells,
+    bonuses: actor.system?.bonuses,
+
+    // Items (spells, equipment, features, etc.)
+    items: actor.items?.map(item => ({
+      id: item._id,
+      name: item.name,
+      type: item.type,
+      levels: item.system?.levels,
+      uses: item.system?.uses,
+      hd: item.system?.hd,
+      effects: item.effects,
+      quantity: item.system?.quantity,
+      attunement: item.system?.attuned,
+      identified: item.system?.identified,
+      equipped: item.system?.equipped,
+      currency: item.system?.currency,
+      container: item.system?.container,
+      price: item.system?.price,
+    })) || [],
+
+    // Active Effects
+    effects: actor.effects?.map(effect => ({
+      id: effect._id,
+      name: effect.name,
+      description: effect.description,
+      duration: effect.duration,
+      statuses: effect.statuses,
+      type: effect.type,
+      disabled: effect.disabled,
+    })) || []
   };
 }
 
-/**
- * Extract roll data (totals and dice results)
- * @param {Object} roll - Roll object
- * @returns {Object} Roll data
- */
-export function extractRollData(roll) {
-  if (!roll) return {};
-
-  const rollData = {
-    total: roll[0]._total,
-    formula: roll[0]._formula,
-    dice: []
-  };
-
-  // Extract dice results - check multiple possible locations
-  const diceSource = roll.dice || roll.terms?.filter(term => term.class === 'D20Die' || term.class === 'Die') || [];
-
-  if (Array.isArray(diceSource)) {
-    rollData.dice = diceSource.map(die => ({
-      faces: die.faces,
-      results: die.results?.map(r => r.result || r) || []
-    }));
-  }
-
-  // If no dice found in expected locations, try extracting from terms
-  if (rollData.dice.length === 0 && roll.terms) {
-    rollData.dice = roll.terms
-      .filter(term => term.faces && term.results)
-      .map(die => ({
-        faces: die.faces,
-        results: die.results.map(r => r.result || r)
-      }));
-  }
-
-  return rollData;
-}
-
-/**
- * Extract context information based on hook type
- * @param {string} hookName - Name of the hook
- * @param {Object} options - Options/context object
- * @returns {Object} Context data
- */
-export function extractContext(hookName, options) {
-  if (!options) return {};
-
-  const context = {};
-
-  // Extract relevant context based on hook type
-  switch (hookName) {
-    case 'dnd5e.rollSkill':
-      if (options.skill) context.skill = options.skill;
-      break;
-
-    case 'dnd5e.rollAbilityCheck':
-      if (options.ability) context.ability = options.ability;
-      break;
-
-    case 'dnd5e.rollSavingThrow':
-      if (options.ability) context.savingThrow = options.ability;
-      break;
-
-    case 'dnd5e.rollAttack':
-      if (options.attackType) context.attackType = options.attackType;
-      if (options.weapon) context.weaponName = options.weapon.name;
-      break;
-
-    case 'dnd5e.rollDamage':
-      if (options.damageType) context.damageType = options.damageType;
-      break;
-
-    case 'dnd5e.applyDamage':
-      if (options.damageType) context.damageType = options.damageType;
-      break;
-  }
-
-  return context;
-}
