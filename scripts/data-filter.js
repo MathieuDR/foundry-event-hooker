@@ -26,11 +26,9 @@ export function extractEventData(hookName, ...args) {
   };
 
   try {
-    attributes = extractAttributes(hookName, args)
-
     return {
       ...eventData,
-      attributes: attributes
+      attributes: extractAttributes(hookName, args)
     }
   } catch (error) {
     console.warn(`Foundry Event Hooker | Error extracting data for ${hookName}:`, error);
@@ -42,6 +40,11 @@ export function shouldLogHook(hookName, args) {
   switch (hookName) {
     case "createChatMessage":
       return args[0].type == "rest"
+
+    case "updateActor":
+    case "updateItem":
+      // Only log if there are actual changes (not just metadata updates)
+      return args[1] && Object.keys(args[1]).some(key => key !== "_stats");
 
     default:
       return true
@@ -119,7 +122,15 @@ export function createDocumentHook(args) {
 }
 
 export function extractFromActor(actor) {
-  if (actor.type != "character") { return {} }
+  if (!actor) return null;
+
+  if (actor.type != "character") {
+    return {
+      id: actor._id,
+      name: actor.name,
+      type: actor.type
+    }
+  }
 
   return {
     // Core Identity
