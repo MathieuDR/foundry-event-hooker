@@ -9,14 +9,15 @@ import { extractEventData, shouldLogHook } from "./data-filter.js";
 
 // List of D&D 5e hooks to monitor
 const MONITORED_HOOKS = [
-  'dnd5e.rollSkill',
-  'dnd5e.rollAbilityCheck',
-  'dnd5e.rollSavingThrow',
-  'dnd5e.rollAttack',
-  'dnd5e.rollDamage',
-  'dnd5e.rollInitiative',
-  'dnd5e.rollDeathSave',
-  'dnd5e.applyDamage'
+  'createChatMessage',
+  'dnd5e.createActiveEffect',
+  'dnd5e.prepareSpellSlots',
+  'updateActor',
+  'updateItem',
+  'dnd5e.calculateDamage',
+  'dnd5e.damageActor',
+  'dnd5e.healActor',
+  'dnd5e.renderChatMessage'
 ];
 
 /**
